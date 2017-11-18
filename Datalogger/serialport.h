@@ -26,7 +26,7 @@ public:
 private slots:
     void readDataFromPort();
 signals:
-    void receivedPacket(Parse* packet);
+    void receivedPacket(Parser* packet);
 };
 
 #endif // SERIALPORT_H

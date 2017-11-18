@@ -5,6 +5,8 @@
 class Parser
 {
 public:
+    int canId     = 0;
+    int timeStamp = 0;
     Parser();
     ~Parser();
     virtual void parse(char data[14]);
