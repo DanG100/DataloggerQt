@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets serialport
 
 TARGET = Datalogger
 TEMPLATE = app
@@ -25,10 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        parser.cpp \
+        serialport.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+        parser.h \
+        serialport.h
 
 FORMS += \
         mainwindow.ui
