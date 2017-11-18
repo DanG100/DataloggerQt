@@ -6,6 +6,9 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include "parser.h"
 
+#define PACKET_LE
+
+
 class SerialPort: public QObject
 {
     Q_OBJECT
@@ -18,7 +21,12 @@ public:
     void readPort();
     int getCanId(char* fakeData);
     //char* getDataAddress();
-    Parser* getParsedObject(char* fakeData);
+    Parser* getParsedObject(char* str);
+
+private slots:
+    void readDataFromPort();
+signals:
+    void receivedPacket(Parse* packet);
 };
 
 #endif // SERIALPORT_H

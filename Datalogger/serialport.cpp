@@ -35,11 +35,11 @@ int SerialPort::getCanId(char* fakeData)//for testing rn
     return &data;
 }*/
 
-Parser* SerialPort::getParsedObject(char* fakeData)
+Parser* SerialPort::getParsedObject(char* str)
 {
     Parser* currObject = new Parser;
     readPort();
-    int canId = 0x200; //getCanId(fakeData);
+    int canId = getCanId(str);
     //time to parse
     if (canId == 0x200)
         currObject = new Throttle();
@@ -73,6 +73,22 @@ Parser* SerialPort::getParsedObject(char* fakeData)
         cout << "Error: No matching CAN ID" << endl;
 
 
-    currObject->parse(fakeData); // parse the message based on the id
+    currObject->parse(str); // parse the message based on the id
     return currObject;
+}
+
+void SerialPort::readDataFromPort()
+{
+    char data[15];
+    int bytesRead = this->serial->readLine(data,PACKET_LEN+1);
+    if(bytesRead == PACKET_LEN);
+    {
+        Parser* msg = getParsedObject(data);
+        emit receivedPacket(msg);
+    }
+    else
+    {
+        //handle imcomplete packets
+    }
+
 }
