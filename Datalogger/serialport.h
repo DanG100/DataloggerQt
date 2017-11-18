@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
+#include "parser.h"
 
 class SerialPort: public QObject
 {
@@ -15,8 +16,9 @@ public:
     SerialPort();
     ~SerialPort();
     void readPort();
-    QByteArray getCanId();
-    char* getDataAddress();
+    int getCanId(char* fakeData);
+    //char* getDataAddress();
+    Parser* getParsedObject(char* fakeData);
 };
 
 #endif // SERIALPORT_H

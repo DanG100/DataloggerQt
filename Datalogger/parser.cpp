@@ -1,16 +1,19 @@
 #include "parser.h"
+#include <iostream>
 
-parser::parser(){}
+using namespace std;
 
-parser::~parser(){}
+Parser::Parser(){}
 
-virtual void parser::parse(){}
+Parser::~Parser(){}
+
+void Parser::parse(char data[14]){}
 
 Throttle::Throttle(){}
 
 Throttle::~Throttle(){}
 
-Throttle::parser(char* data)
+void Throttle::parse(char data[14])
 {
     checkBit = data[6];
     throttleScale = (data[7] << 8) + data[8];
@@ -19,7 +22,7 @@ Brake::Brake(){}
 
 Brake::~Brake(){}
 
-void Brake::parse(char* data)
+void Brake::parse(char data[14])
 {
     checkBit = data[6]; //difference check bit
     scaledBrake = (data[7] << 8) + data[8]; //scaled brake value with 15% deadzone
@@ -32,7 +35,7 @@ Pack::Pack(){}
 
 Pack::~Pack(){}
 
-void Pack::parse(char* data)
+void Pack::parse(char data[14])
 {
     carName = data[6]; //Car name
     soc = data[7]; //SOC in percent
@@ -43,7 +46,7 @@ Voltage::Voltage(){}
 
 Voltage::~Voltage(){}
 
-void Voltage::parse()
+void Voltage::parse(char data[14])
 {
     minVolt = (data[6] << 8) + data[7]; //Minimum cell voltage in mv (HEX)
     maxVolt = (data[8] << 8) + data[9]; //Maximum cell voltage in mv (HEX)
@@ -54,7 +57,7 @@ Temperature::Temperature(){}
 
 Temperature::~Temperature(){}
 
-void Temperature::parse(char* data)
+void Temperature::parse(char data[14])
 {
     nodeZero = data[6]; //Highest temp value of Node 0 (DEC degree)
     nodeOne = data[7]; //Highest temp value of Node 1 (DEC Degree)
@@ -70,7 +73,7 @@ CurrentRead::CurrentRead(){}
 
 CurrentRead::~CurrentRead(){}
 
-void CurrentRead::parse(char* data)
+void CurrentRead::parse(char data[14])
 {
     currDirection = data[6]; //Current direction(0 for discharging 1 for charging)
     rawCurr = (data[7] << 8) + data[8]; //Raw Current flow in Amper (HEX)
@@ -82,7 +85,7 @@ DashBoard::DashBoard(){}
 
 DashBoard::~DashBoard(){}
 
-void DashBoard::parse(char *data)
+void DashBoard::parse(char data[14])
 {
     state = data[6]; //State
     errorState = data[7]; //error state
@@ -92,7 +95,7 @@ CurtisDebug::CurtisDebug(){}
 
 CurtisDebug::~CurtisDebug(){}
 
-void CurtisDebug::parse(char *data)
+void CurtisDebug::parse(char data[14])
 {
     setInterlock = data[6]; //SetInterlock
     hvRequest = data[7]; //HVRequest
@@ -108,7 +111,7 @@ CurtisStatus::CurtisStatus(){}
 
 CurtisStatus::~CurtisStatus(){}
 
-void CurtisStatus::parse(char *data)
+void CurtisStatus::parse(char data[14])
 {
     capacitorHighVolt = data[6]; //Capacitor Voltage High
     capacitorLowVolt = data[7]; //Capacitor Voltage Low
@@ -122,9 +125,9 @@ void CurtisStatus::parse(char *data)
 
 CurtisRecvAcknowledge::CurtisRecvAcknowledge(){}
 
-CurtisRecvAcknowledge::CurtisRecvAcknowledge(){}
+CurtisRecvAcknowledge::~CurtisRecvAcknowledge(){}
 
-void CurtisRecvAcknowledge::parse(char *data)
+void CurtisRecvAcknowledge::parse(char data[14])
 {
     ff = data[6]; //FF
     highVolt = data[7]; //Kewswitch Voltage High (LV Battery)
@@ -140,7 +143,7 @@ CurtisRecv::CurtisRecv(){}
 
 CurtisRecv::~CurtisRecv(){}
 
-void CurtisRecv::parse(char *data)
+void CurtisRecv::parse(char data[14])
 {
     setInterlock = data[6]; //SetInterlock
     throttleHigh = data[7]; //throttle_HI
@@ -151,7 +154,7 @@ DLHeartbeat::DLHeartbeat(){}
 
 DLHeartbeat::~DLHeartbeat(){}
 
-DLHeartbeat::parse(char* data)
+void DLHeartbeat::parse(char data[14])
 {
     heartBeat = data[6]; //0x01
 }
@@ -160,7 +163,7 @@ DLTime::DLTime(){}
 
 DLTime::~DLTime(){}
 
-void DLTime::parse(char *data)
+void DLTime::parse(char data[14])
 {
     yearHigh = data[7]; //Year High(HEX)
     yearLow = data[8]; //Year Low(HEX)
@@ -175,7 +178,7 @@ SensorStatus::SensorStatus(){}
 
 SensorStatus::~SensorStatus(){}
 
-void SensorStatus::parse(char *data)
+void SensorStatus::parse(char data[14])
 {
     wheelSpeedOne = data[6]; //front left
     wheelSpeedTwo = data[7]; //front right

@@ -2,15 +2,15 @@
 #define PARSER_H
 
 
-class parser
+class Parser
 {
 public:
-    parser();
-    ~parser();
-    virtual void parse();
+    Parser();
+    ~Parser();
+    virtual void parse(char data[14]);
 };
 
-class Throttle: public parser
+class Throttle: public Parser
 {
 public:
     int checkBit      = 0;
@@ -20,11 +20,11 @@ public:
     Throttle();
     ~Throttle();
 
-    void parse(char* data);
+    void parse(char data[14]);
 
 };
 
-class Brake: public parser
+class Brake: public Parser
 {
 public:
     int checkBit    = 0;
@@ -35,10 +35,10 @@ public:
     Brake();
     ~Brake();
 
-    void parse(char* data);
+    void parse(char data[14]);
 };
 
-class Pack: public parser
+class Pack: public Parser
 {
 public:
     int carName = 0;
@@ -48,10 +48,10 @@ public:
     Pack();
     ~Pack();
 
-    void parse(char* data);
+    void parse(char data[14]);
 };
 
-class Voltage: public parser
+class Voltage: public Parser
 {
 public:
     int minVolt  = 0;
@@ -61,10 +61,10 @@ public:
     Voltage();
     ~Voltage();
 
-    void parse(char* data);
+    void parse(char data[14]);
 };
 
-class Temperature: public parser
+class Temperature: public Parser
 {
 public:
     int nodeZero    = 0;
@@ -79,10 +79,10 @@ public:
     Temperature();
     ~Temperature();
 
-    void parse(char* data);
+    void parse(char data[14]);
 };
 
-class CurrentRead: public parser
+class CurrentRead: public Parser
 {
 public:
     int currDirection    = 0;
@@ -93,10 +93,10 @@ public:
     CurrentRead();
     ~CurrentRead();
 
-    void parsed(char* data);
+    void parse(char data[14]);
 };
 
-class DashBoard: public parser
+class DashBoard: public Parser
 {
 public:
     int state      = 0;
@@ -105,10 +105,10 @@ public:
     DashBoard();
     ~DashBoard();
 
-    void parse(char* data);
+    void parse(char data[14]);
 };
 
-class CurtisDebug: public parser
+class CurtisDebug: public Parser
 {
 public:
     int setInterlock = 0;
@@ -123,10 +123,10 @@ public:
     CurtisDebug();
     ~CurtisDebug();
 
-    void parse(char* data);
+    void parse(char data[14]);
 };
 
-class CurtisStatus: public parser
+class CurtisStatus: public Parser
 {
 public:
     int capacitorHighVolt = 0;
@@ -141,10 +141,10 @@ public:
     CurtisStatus();
     ~CurtisStatus();
 
-    void parse(char* data);
+    void parse(char data[14]);
 };
 
-class CurtisRecvAcknowledge: public Can
+class CurtisRecvAcknowledge: public Parser
 {
 public:
     int ff                 = 0;
@@ -159,10 +159,10 @@ public:
     CurtisRecvAcknowledge();
     ~CurtisRecvAcknowledge();
 
-    void parse(char* data);
+    void parse(char data[14]);
 };
 
-class CurtisRecv: public Can
+class CurtisRecv: public Parser
 {
 public:
     int setInterlock = 0;
@@ -172,10 +172,10 @@ public:
     CurtisRecv();
     ~CurtisRecv();
 
-    void parse(char* data);
+    void parse(char data[14]);
 };
 
-class DLHeartbeat: public Can
+class DLHeartbeat: public Parser
 {
 public:
     int heartBeat = 0;
@@ -183,11 +183,11 @@ public:
     DLHeartbeat();
     ~DLHeartbeat();
 
-    void parse(char* data);
+    void parse(char data[14]);
 
 };
 
-class DLTime: public Can
+class DLTime: public Parser
 {
 public:
     int yearHigh = 0;
@@ -201,10 +201,10 @@ public:
     DLTime();
     ~DLTime();
 
-    void parse(char* data);
+    void parse(char data[14]);
 };
 
-class SensorStatus: public Can
+class SensorStatus: public Parser
 {
 public:
     int wheelSpeedOne   = 0;
@@ -216,7 +216,7 @@ public:
     SensorStatus();
     ~SensorStatus();
 
-    void parse(char* data);
+    void parse(char data[14]);
 };
 
 #endif // PARSER_H
