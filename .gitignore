@@ -1,8 +1,39 @@
-Datalogger/Datalogger.pro.*
+# C++ objects and libs
 
-build-Datalogger-Desktop*-Debug/debug/
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.so
+*.dll
+*.dylib
 
+# Qt-es
 
-build-Datalogger-Desktop_Qt_5_9_2_MinGW_32bit-Debug/
-Datalogger/Datalogger\.pro\.user\.*
-build-Datalogger-Desktop*-Debug/
+/.qmake.cache
+/.qmake.stash
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+Makefile*
+*build-*
+
+# QtCreator
+
+*.autosave
+
+# QtCtreator Qml
+*.qmlproject.user
+*.qmlproject.user.*
+
+# QtCtreator CMake
+CMakeLists.txt.user*
+
