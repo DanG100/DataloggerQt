@@ -2,4 +2,7 @@ Datalogger/Datalogger.pro.*
 
 build-Datalogger-Desktop*-Debug/debug/
 
+
+build-Datalogger-Desktop_Qt_5_9_2_MinGW_32bit-Debug/
+Datalogger/Datalogger\.pro\.user\.*
 build-Datalogger-Desktop*-Debug/
