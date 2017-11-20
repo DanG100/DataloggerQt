@@ -5,8 +5,12 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 #include "parser.h"
+#include <QDebug>
 
-#define PACKET_LE
+#define PACKET_LEN 14
+#define NO_SERIAL_PORT 2
+#define OPEN_ERROR 1
+#define NO_ERROR 0
 
 
 class SerialPort: public QObject
@@ -18,11 +22,11 @@ public:
 
     SerialPort();
     ~SerialPort();
-    void readPort();
-    int getCanId(char* fakeData);
-    //char* getDataAddress();
-    Parser* getParsedObject(char* str);
+    int getCanId(char* data);
+    Parser* getParsedObject(char* data);
 
+private:
+    int setupSerialPort();
 private slots:
     void readDataFromPort();
 signals:
