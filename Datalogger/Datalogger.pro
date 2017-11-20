@@ -6,7 +6,8 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets charts
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets serialport charts
 
 TARGET = Datalogger
 TEMPLATE = app
@@ -32,7 +33,9 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     linegraph.h \
-    testinput.h
+    testinput.h \
+    serialport.h \
+    parser.h 
 
 FORMS += \
         mainwindow.ui
