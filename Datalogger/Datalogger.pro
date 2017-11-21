@@ -29,7 +29,8 @@ SOURCES += \
     mainwindow.cpp \
     linegraph.cpp \
     testinput.cpp \
-    serialport.cpp
+    serialport.cpp \
+    parser.cpp
     
 HEADERS += \
         mainwindow.h \
