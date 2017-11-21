@@ -25,11 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
+    main.cpp \
+    mainwindow.cpp \
     linegraph.cpp \
-    testinput.cpp
-
+    testinput.cpp \
+    serialport.cpp
+    
 HEADERS += \
         mainwindow.h \
     linegraph.h \
