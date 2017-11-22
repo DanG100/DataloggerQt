@@ -10,7 +10,7 @@ LineGraph::LineGraph(QWidget *parent) : QWidget(parent)
 
 void LineGraph::graphSetUp()
 {
-    connect(testInput, SIGNAL (givePoint(QPointF)), this, SLOT (recieveData(QPointF)));
+    connect(testInput, SIGNAL (givePoint(QPointF)), this, SLOT (receiveData(QPointF)));
 
     chart->legend()->hide();
     chart->setTitle(graphTitle); //Whole Chart setup
@@ -78,7 +78,7 @@ void LineGraph::updateGraph(int count)
 
 //---------------------Slots---------------------
 
-void LineGraph::recieveData (QPointF point)
+void LineGraph::receiveData (QPointF point)
 {
 //    if (lineSeries->count() == 60) //Removes the oldest point
 //        lineSeries->remove(0);
@@ -98,4 +98,12 @@ void LineGraph::keyPressEvent(QKeyEvent *event) //Detect Keyboard presses
 {
     if (event->key() == Qt::Key_Enter)
         trackingX = spinBox->value();
+}
+
+void LineGraph::receiveCanMsg(CANMessage *msg)
+{
+/*
+ *
+ * do the stuff here
+ */
 }

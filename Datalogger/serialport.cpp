@@ -1,5 +1,5 @@
 #include "serialport.h"
-#include "parser.h"
+#include "canmessage.h"
 
 #include <iostream>
 
@@ -22,9 +22,9 @@ int SerialPort::getCanId(char* data)//for testing rn
     return canId;
 }
 
-Parser* SerialPort::getParsedObject(char* data)
+CANMessage* SerialPort::getParsedObject(char* data)
 {
-    Parser* currObject = new Parser;
+    CANMessage* currObject = new CANMessage;
     int canId = getCanId(data);
     //time to parse
     if (canId == 0x200)
@@ -65,11 +65,11 @@ Parser* SerialPort::getParsedObject(char* data)
 
 void SerialPort::readDataFromPort()
 {
-    char data[15];
+    char data[PACKET_LEN+1];
     int bytesRead = this->serial->readLine(data,PACKET_LEN+1);
     if(bytesRead == PACKET_LEN)
     {
-        Parser* msg = getParsedObject(data);
+        CANMessage* msg = getParsedObject(data);
         emit receivedPacket(msg);
     }
     else

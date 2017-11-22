@@ -2,17 +2,17 @@
 #define PARSER_H
 
 
-class Parser
+class CANMessage
 {
 public:
     int canId     = 0;
     int timeStamp = 0;
-    Parser();
-    ~Parser();
+    CANMessage();
+    ~CANMessage();
     virtual void parse(char data[14]);
 };
 
-class Throttle: public Parser
+class Throttle: public CANMessage
 {
 public:
     int checkBit      = 0;
@@ -26,7 +26,7 @@ public:
 
 };
 
-class Brake: public Parser
+class Brake: public CANMessage
 {
 public:
     int checkBit    = 0;
@@ -40,7 +40,7 @@ public:
     void parse(char data[14]);
 };
 
-class Pack: public Parser
+class Pack: public CANMessage
 {
 public:
     int carName = 0;
@@ -53,7 +53,7 @@ public:
     void parse(char data[14]);
 };
 
-class Voltage: public Parser
+class Voltage: public CANMessage
 {
 public:
     int minVolt  = 0;
@@ -66,7 +66,7 @@ public:
     void parse(char data[14]);
 };
 
-class Temperature: public Parser
+class Temperature: public CANMessage
 {
 public:
     int nodeZero    = 0;
@@ -84,7 +84,7 @@ public:
     void parse(char data[14]);
 };
 
-class CurrentRead: public Parser
+class CurrentRead: public CANMessage
 {
 public:
     int currDirection    = 0;
@@ -98,7 +98,7 @@ public:
     void parse(char data[14]);
 };
 
-class DashBoard: public Parser
+class DashBoard: public CANMessage
 {
 public:
     int state      = 0;
@@ -110,7 +110,7 @@ public:
     void parse(char data[14]);
 };
 
-class CurtisDebug: public Parser
+class CurtisDebug: public CANMessage
 {
 public:
     int setInterlock = 0;
@@ -128,7 +128,7 @@ public:
     void parse(char data[14]);
 };
 
-class CurtisStatus: public Parser
+class CurtisStatus: public CANMessage
 {
 public:
     int capacitorHighVolt = 0;
@@ -146,7 +146,7 @@ public:
     void parse(char data[14]);
 };
 
-class CurtisRecvAcknowledge: public Parser
+class CurtisRecvAcknowledge: public CANMessage
 {
 public:
     int ff                 = 0;
@@ -164,7 +164,7 @@ public:
     void parse(char data[14]);
 };
 
-class CurtisRecv: public Parser
+class CurtisRecv: public CANMessage
 {
 public:
     int setInterlock = 0;
@@ -177,7 +177,7 @@ public:
     void parse(char data[14]);
 };
 
-class DLHeartbeat: public Parser
+class DLHeartbeat: public CANMessage
 {
 public:
     int heartBeat = 0;
@@ -189,7 +189,7 @@ public:
 
 };
 
-class DLTime: public Parser
+class DLTime: public CANMessage
 {
 public:
     int yearHigh = 0;
@@ -206,7 +206,7 @@ public:
     void parse(char data[14]);
 };
 
-class SensorStatus: public Parser
+class SensorStatus: public CANMessage
 {
 public:
     int wheelSpeedOne   = 0;

@@ -30,14 +30,16 @@ SOURCES += \
     linegraph.cpp \
     testinput.cpp \
     serialport.cpp \
-    parser.cpp
+    canmessage.cpp \
+    logger.cpp
     
 HEADERS += \
         mainwindow.h \
     linegraph.h \
     testinput.h \
     serialport.h \
-    parser.h 
+    canmessage.h \
+    logger.h
 
 FORMS += \
         mainwindow.ui

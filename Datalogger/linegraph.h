@@ -7,6 +7,7 @@
 #include <QWheelEvent>
 #include <QKeyEvent>
 #include "testinput.h"
+#include "canmessage.h"
 
 
 class LineGraph : public QWidget
@@ -22,8 +23,9 @@ protected:
 signals:
 
 public slots:
-    void recieveData (QPointF point);
+    void receiveData (QPointF point);
     void keyPressEvent(QKeyEvent *event);
+    void receiveCanMsg (CANMessage* msg);
 
 private:
     QString graphTitle;

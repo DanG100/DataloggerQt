@@ -8,11 +8,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(&serialPort,SIGNAL(receivedPacket(CANMessage*)),ui->chart1,SLOT(receiveCanMsg(CANMessage*)));
+    connect(&serialPort,SIGNAL(receivedPacket(CANMessage*)),&logger,SLOT(receiveCanMsg(CANMessage*)));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    disconnect(&serialPort,SIGNAL(receivedPacket(CANMessage*)),ui->chart1,SLOT(receiveCanMsg(CANMessage*)));
+    disconnect(&serialPort,SIGNAL(receivedPacket(CANMessage*)),&logger,SLOT(receiveCanMsg(CANMessage*)));
 }
 
 void MainWindow::on_actionExit_triggered()

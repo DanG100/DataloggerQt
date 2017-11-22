@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
-
+#include "serialport.h"
+#include "logger.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +22,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    SerialPort serialPort;
+    Logger logger;
 };
 
 #endif // MAINWINDOW_H

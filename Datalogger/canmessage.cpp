@@ -1,13 +1,13 @@
-#include "parser.h"
+#include "canmessage.h"
 #include <iostream>
 
 using namespace std;
 
-Parser::Parser(){}
+CANMessage::CANMessage(){}
 
-Parser::~Parser(){}
+CANMessage::~CANMessage(){}
 
-void Parser::parse(char data[14])
+void CANMessage::parse(char data[14])
 {
     canId = (data[0] << 8) + data[1];
     timeStamp = (data[2] << 24) + (data[3] << 16) + (data[4] << 8) + data[5];
@@ -19,7 +19,7 @@ Throttle::~Throttle(){}
 
 void Throttle::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     checkBit = data[6];
     throttleScale = (data[7] << 8) + data[8];
 }
@@ -29,7 +29,7 @@ Brake::~Brake(){}
 
 void Brake::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     checkBit = data[6]; //difference check bit
     scaledBrake = (data[7] << 8) + data[8]; //scaled brake value with 15% deadzone
     //zeroPadded = (data[]) >> 16; //zero-padded
@@ -43,7 +43,7 @@ Pack::~Pack(){}
 
 void Pack::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     carName = data[6]; //Car name
     soc = data[7]; //SOC in percent
     bmsStat = (data[8] << 8) + data[9]; //BMS status bits
@@ -55,7 +55,7 @@ Voltage::~Voltage(){}
 
 void Voltage::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     minVolt = (data[6] << 8) + data[7]; //Minimum cell voltage in mv (HEX)
     maxVolt = (data[8] << 8) + data[9]; //Maximum cell voltage in mv (HEX)
     packVolt = (data[10] << 24) + (data[11] << 16) + (data[12] << 8) + data[13]; //Pack voltage mV (HEX)
@@ -67,7 +67,7 @@ Temperature::~Temperature(){}
 
 void Temperature::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     nodeZero = data[6]; //Highest temp value of Node 0 (DEC degree)
     nodeOne = data[7]; //Highest temp value of Node 1 (DEC Degree)
     nodeTwo = data[8]; //Highest temp value of Node 2 (DEC Degree)
@@ -84,7 +84,7 @@ CurrentRead::~CurrentRead(){}
 
 void CurrentRead::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     currDirection = data[6]; //Current direction(0 for discharging 1 for charging)
     rawCurr = (data[7] << 8) + data[8]; //Raw Current flow in Amper (HEX)
     currDirectionTwo = data[11]; //Current direction (0 for discharging)
@@ -97,7 +97,7 @@ DashBoard::~DashBoard(){}
 
 void DashBoard::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     state = data[6]; //State
     errorState = data[7]; //error state
 }
@@ -108,7 +108,7 @@ CurtisDebug::~CurtisDebug(){}
 
 void CurtisDebug::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     setInterlock = data[6]; //SetInterlock
     hvRequest = data[7]; //HVRequest
     state = data[8]; //state
@@ -125,7 +125,7 @@ CurtisStatus::~CurtisStatus(){}
 
 void CurtisStatus::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     capacitorHighVolt = data[6]; //Capacitor Voltage High
     capacitorLowVolt = data[7]; //Capacitor Voltage Low
     rpmHigh = data[8]; //ABS_Motor_RPM High (High+low = 0 to 7FFF)
@@ -142,7 +142,7 @@ CurtisRecvAcknowledge::~CurtisRecvAcknowledge(){}
 
 void CurtisRecvAcknowledge::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     ff = data[6]; //FF
     highVolt = data[7]; //Kewswitch Voltage High (LV Battery)
     lowVolt = data[8]; //Keyswitch Voltage Low (LV Battery)
@@ -159,7 +159,7 @@ CurtisRecv::~CurtisRecv(){}
 
 void CurtisRecv::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     setInterlock = data[6]; //SetInterlock
     throttleHigh = data[7]; //throttle_HI
     throttleLow = data[8]; //throttle_LO
@@ -171,7 +171,7 @@ DLHeartbeat::~DLHeartbeat(){}
 
 void DLHeartbeat::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     heartBeat = data[6]; //0x01
 }
 
@@ -181,7 +181,7 @@ DLTime::~DLTime(){}
 
 void DLTime::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     yearHigh = data[7]; //Year High(HEX)
     yearLow = data[8]; //Year Low(HEX)
     month = data[9]; //Month(HEX)
@@ -197,7 +197,7 @@ SensorStatus::~SensorStatus(){}
 
 void SensorStatus::parse(char data[14])
 {
-    Parser::parse(data);
+    CANMessage::parse(data);
     wheelSpeedOne = data[6]; //front left
     wheelSpeedTwo = data[7]; //front right
     wheelSpeedThree = data[8]; //rear left

@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include "parser.h"
+#include "canmessage.h"
 #include <QDebug>
 
 #define PACKET_LEN 14
@@ -23,14 +23,14 @@ public:
     SerialPort();
     ~SerialPort();
     int getCanId(char* data);
-    Parser* getParsedObject(char* data);
+    CANMessage* getParsedObject(char* data);
 
 private:
     int setupSerialPort();
 private slots:
     void readDataFromPort();
 signals:
-    void receivedPacket(Parser* packet);
+    void receivedPacket(CANMessage* packet);
 };
 
 #endif // SERIALPORT_H
