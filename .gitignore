@@ -10,6 +10,9 @@
 *.dll
 *.dylib
 
+#MAC
+.DS_Store
+
 # Qt-es
 
 /.qmake.cache
@@ -33,7 +36,11 @@ Makefile*
 # QtCtreator Qml
 *.qmlproject.user
 *.qmlproject.user.*
+Datalogger.pro.user*
 
 # QtCtreator CMake
 CMakeLists.txt.user*
+
+#build
+build-Datalogger*
 
