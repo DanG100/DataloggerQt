@@ -29,17 +29,23 @@ SOURCES += \
     mainwindow.cpp \
     linegraph.cpp \
     testinput.cpp \
-    serialport.cpp \
+    scrollingviewtab.cpp \
+    lockedviewtab.cpp \
+    table.cpp \
     canmessage.cpp \
-    logger.cpp
-    
+    logger.cpp \
+    serialport.cpp
+
 HEADERS += \
         mainwindow.h \
     linegraph.h \
     testinput.h \
-    serialport.h \
+    scrollingviewtab.h \
+    lockedviewtab.h \
+    table.h \
     canmessage.h \
-    logger.h
+    logger.h \
+    serialport.h
 
 FORMS += \
         mainwindow.ui

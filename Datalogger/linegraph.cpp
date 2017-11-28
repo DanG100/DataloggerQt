@@ -29,18 +29,26 @@ void LineGraph::graphSetUp()
 
 void LineGraph::initializeClassElements()
 {
+
     graphTitle = "No Title";
     chart = new QChart();
     lineSeries = new QLineSeries();
     testInput = new TestInput();
+
     axisX = new QValueAxis();
     axisY = new QValueAxis();
+    offSet = 20;
+    range = 40;
 
+    scrollingViewTab = new ScrollingViewTab();
+    lockedViewTab = new LockedViewTab();
 
-    spinBox = new QSpinBox();
-        spinBox->setMaximum(1000000);
-    label = new QLabel();
-        label->setText("Window X Width:");
+    viewModeTabWidget = new QTabWidget();
+        viewModeTabWidget->addTab(scrollingViewTab, "Scrolling View");
+        viewModeTabWidget->addTab(lockedViewTab, "Locked View");
+        connect(scrollingViewTab, SIGNAL(signalApplyPressed()), this, SLOT(doApply())); //THESE CONNECTS DON'T WORK YET
+        connect(lockedViewTab, SIGNAL(signalApplyPressed()), this, SLOT(doApply())); //SO NO APPLY BUTTON FUNCTIONALITY
+
     chartView = new QChartView(chart);
         initializeChartView();
     gridLayout = new QGridLayout();
@@ -50,27 +58,31 @@ void LineGraph::initializeClassElements()
 void LineGraph::initializeChartView()
 {
     chartView->setRenderHint(QPainter::Antialiasing);
-    chartView->setRubberBand(QChartView::HorizontalRubberBand);
-    chartView->lower();
+    chartView->setMinimumHeight(800);
+    chartView->setMinimumWidth(800);
 }
 
 void LineGraph::initializeGridLayout()
 {
-    gridLayout->addWidget(chartView, 1, 3);
-    gridLayout->addWidget(spinBox, 1, 2, 1, 1, Qt::AlignTop);
-    gridLayout->addWidget(label, 1, 1, 1, 1, Qt::AlignTop);
+    gridLayout->addWidget(chartView, 1, 2, 1, 1, Qt::AlignCenter);
+    gridLayout->addWidget(viewModeTabWidget, 1, 1, 1, 1, Qt::AlignCenter);
+    gridLayout->setColumnMinimumWidth(2, 400);
+    gridLayout->setColumnStretch(2, 1000);
     setLayout(gridLayout);
 }
 
 
 void LineGraph::updateGraph(int count)
 {
-    int rangeMin = count - trackingX;
-    int rangeMax = count;
 
-    if (trackingX < 5) rangeMin = count - 100;
+    if (currentTabIndex == 0) //Scrolling
+    {
+        rangeMin = count - offSet;
+        rangeMax = rangeMin + range;
+    }
 
-    if (rangeMin < 0) rangeMin = 0;
+    //if (rangeMin < 0) rangeMin = 0;
+    if (rangeMin == rangeMax) rangeMax++;
 
     axisX->setRange(rangeMin, rangeMax);
     chart->update();
@@ -80,24 +92,36 @@ void LineGraph::updateGraph(int count)
 
 void LineGraph::receiveData (QPointF point)
 {
-//    if (lineSeries->count() == 60) //Removes the oldest point
-//        lineSeries->remove(0);
     *lineSeries << point;
     updateGraph(lineSeries->count());
 }
 
-void LineGraph::wheelEvent(QWheelEvent *event) //Zooming in/out
+void LineGraph::wheelEvent(QWheelEvent *event) //Zooming in/out //Not used yet... yet
 {
-    if(event->delta() > 0) trackingX -= lineSeries->count() / 10; //Zoom in
-    else if(event->delta() < 0) trackingX += lineSeries->count() / 10; //Zoom out
-
     event->accept();
 }
 
 void LineGraph::keyPressEvent(QKeyEvent *event) //Detect Keyboard presses
 {
-    if (event->key() == Qt::Key_Enter)
-        trackingX = spinBox->value();
+    if (event->key() == Qt::Key_Enter) doApply();
+
+}
+
+void LineGraph::doApply()
+{
+    if (viewModeTabWidget->currentIndex() == 0) //If scrolling view tab is open
+    {
+        currentTabIndex = 0;
+        offSet = scrollingViewTab->getOffset();
+        range = scrollingViewTab->getRange();
+
+    }
+    if (viewModeTabWidget->currentIndex() == 1) //If locked view tab is open
+    {
+        currentTabIndex = 1;
+        rangeMin = lockedViewTab->getMinX();
+        rangeMax = lockedViewTab->getMaxX();
+    }
 }
 
 void LineGraph::receiveCanMsg(CANMessage *msg)

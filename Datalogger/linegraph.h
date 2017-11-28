@@ -7,6 +7,8 @@
 #include <QWheelEvent>
 #include <QKeyEvent>
 #include "testinput.h"
+#include "scrollingviewtab.h"
+#include "lockedviewtab.h"
 #include "canmessage.h"
 
 
@@ -25,20 +27,32 @@ signals:
 public slots:
     void receiveData (QPointF point);
     void keyPressEvent(QKeyEvent *event);
-    void receiveCanMsg (CANMessage* msg);
-
+    void doApply();
+    void receiveCanMsg(CANMessage *msg);
 private:
     QString graphTitle;
     QChart * chart;
     QLineSeries *lineSeries;
     TestInput * testInput;
+
     QValueAxis *axisX;
     QValueAxis *axisY;
-    int trackingX = 0;
+
     QSpinBox * spinBox;
     QChartView * chartView;
     QGridLayout *gridLayout;
     QLabel * label;
+
+
+    QTabWidget * viewModeTabWidget;
+    int currentTabIndex;
+
+    ScrollingViewTab * scrollingViewTab;
+    LockedViewTab * lockedViewTab;
+    int offSet;
+    int range;
+    int rangeMin;
+    int rangeMax;
 
     void initializeClassElements();
     void graphSetUp();
