@@ -62,7 +62,6 @@ CANMessage* SerialPort::getParsedObject(char* data)
     currObject->parse(data); // parse the message based on the id
     return currObject;
 }
-/*
 void SerialPort::readDataFromPort()
 {
     char data[PACKET_LEN+1];
