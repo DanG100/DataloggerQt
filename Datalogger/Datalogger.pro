@@ -34,7 +34,8 @@ SOURCES += \
     table.cpp \
     canmessage.cpp \
     logger.cpp \
-    serialport.cpp
+    serialport.cpp \
+    graphinputhandler.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
     table.h \
     canmessage.h \
     logger.h \
-    serialport.h
+    serialport.h \
+    graphinputhandler.h
 
 FORMS += \
         mainwindow.ui

@@ -6,7 +6,6 @@
 #include <QtGui>
 #include <QWheelEvent>
 #include <QKeyEvent>
-#include "testinput.h"
 #include "scrollingviewtab.h"
 #include "lockedviewtab.h"
 #include "canmessage.h"
@@ -18,6 +17,9 @@ class LineGraph : public QWidget
 public:
     explicit LineGraph(QWidget *parent = nullptr);
     void wheelEvent(QWheelEvent *event); //Mousewheel or trackpad scroll
+    void updateLine1(float timeStamp, float value);
+    void updateLine2(float timeStamp, float value);
+    void setYAxisName(int yAxisNum, QString name);
 
 protected:
 
@@ -25,18 +27,24 @@ protected:
 signals:
 
 public slots:
-    void receiveData (QPointF point);
     void keyPressEvent(QKeyEvent *event);
     void doApply();
-    void receiveCanMsg(CANMessage *msg);
 private:
     QString graphTitle;
     QChart * chart;
-    QLineSeries *lineSeries;
-    TestInput * testInput;
+    QLineSeries *lineSeries1;
+    QLineSeries *lineSeries2;
+    QColor lineSeries1Color = "blue";
+    QColor lineSeries2Color = "green";
 
     QValueAxis *axisX;
-    QValueAxis *axisY;
+    QValueAxis *axisY1;
+    QValueAxis *axisY2;
+    QBrush axisY1TitleBrush;
+    QBrush axisY2TitleBrush;
+    float maxX = 0;
+    float maxY1 = 0;
+    float maxY2 = 0;
 
     QSpinBox * spinBox;
     QChartView * chartView;
@@ -58,7 +66,7 @@ private:
     void graphSetUp();
     void initializeChartView();
     void initializeGridLayout();
-    void updateGraph(int count);
+    void updateGraph();
 };
 
 #endif // LINEGRAPH_H
