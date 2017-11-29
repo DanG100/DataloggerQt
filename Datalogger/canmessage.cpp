@@ -32,7 +32,6 @@ void Brake::parse(char data[14])
     CANMessage::parse(data);
     checkBit = data[6]; //difference check bit
     scaledBrake = (data[7] << 8) + data[8]; //scaled brake value with 15% deadzone
-    //zeroPadded = (data[]) >> 16; //zero-padded
     rawBrakeVal = (data[12] << 8) + data[13]; //raw brake value
 }
 

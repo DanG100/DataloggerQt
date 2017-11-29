@@ -1,31 +1,40 @@
 #include "logger.h"
 #include <iostream>
-#include <fstream>
-#include <string.h>
-#include <ctime>
-#include <time.h>
+#include <QFile>
+#include <QTextStream>
 
-using namespace std;
+//using namespace std;
 
 Logger::Logger()
 {
 
 }
 
-void Logger::receiveCanMsg(CANMessage *msg)
+//USE QFILE
+void Logger::startFile() //make file named the date/time of start of program
 {
-    ofstream fileStream;
     time_t now = time(0);
     tm* namePtr = localtime(&now);
-    string name = asctime(namePtr); //namePtr->tm_mon + "_" + namePtr->tm_mday + "_" + namePtr->tm_year + "_" + namePtr->tm_hour + "_" + namePtr->tm_min + "_" + namePtr->tm_sec;
-    fileStream.open(name + ".csv"); //figure out how to get current date and time to name this
+    QString name = asctime(namePtr);
+    file.setFileName(name + ".csv");
+    file.open(QIODevice::WriteOnly);
+}
+
+void Logger::endFile() //close file
+{
+    file.close();
+}
+
+void Logger::receiveCanMsg(CANMessage *msg)
+{
+    QTextStream fileStream(&file);
 
     int canId = msg->canId;
     int timeStamp = msg->timeStamp;
     fileStream << canId << "," << timeStamp << "," ;
 
     if(canId == 0x200)
-        fileStream << ((Throttle*)msg)->checkBit << "," << ((Throttle*)msg)->throttleScale << ", " << ((Throttle*)msg)->zeroPadded << endl;
+        fileStream << ((Throttle*)msg)->checkBit << "," << ((Throttle*)msg)->throttleScale << endl;
     else if(canId == 0x201)
         fileStream << ((Brake*)msg)->checkBit << "," << ((Brake*)msg)->scaledBrake << "," << ((Brake*)msg)->rawBrakeVal << endl;
     else if(canId == 0x188)

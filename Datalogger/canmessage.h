@@ -17,7 +17,6 @@ class Throttle: public CANMessage
 public:
     int checkBit      = 0;
     int throttleScale = 0;
-    int zeroPadded    = 0; //ask if zero padded is something
 
     Throttle();
     ~Throttle();
@@ -31,7 +30,6 @@ class Brake: public CANMessage
 public:
     int checkBit    = 0;
     int scaledBrake = 0;
-    int zeroPadded  = 0;
     int rawBrakeVal = 0;
 
     Brake();
