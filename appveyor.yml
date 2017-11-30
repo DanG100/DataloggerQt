@@ -22,7 +22,8 @@ after_build:
     - cd ..
     - appveyor DownloadFile http://www.nirsoft.net/utils/nircmd-x64.zip
     - 7z x nircmd-x64.zip
-    - ps: start nircmd.exe cmdwait 3000 savescreenshot screenshot.png
     - ps: start deploy\Datalogger.exe
-    
+    - nircmd.exe cmdwait 3000 savescreenshot screenshot.png
+
+
     
