@@ -27,7 +27,7 @@ private:
     Ui::MainWindow *ui;
     SerialPort serialPort;
     Logger logger;
-    GraphInputHandler * graphInputHander;
+    GraphInputHandler * graphInputHandler;
 
     TestInput * testInput;
 };

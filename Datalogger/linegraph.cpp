@@ -59,7 +59,8 @@ void LineGraph::initializeClassElements()
         viewModeTabWidget->addTab(lockedViewTab, "Locked View");
         connect(scrollingViewTab, SIGNAL(signalApplyPressed()), this, SLOT(doApply()));
         connect(lockedViewTab, SIGNAL(signalApplyPressed()), this, SLOT(doApply()));
-
+        viewModeTabWidget->setMaximumWidth(200);
+        viewModeTabWidget->setMaximumHeight(150);
     chartView = new QChartView(chart);
         initializeChartView();
     gridLayout = new QGridLayout();
@@ -75,10 +76,8 @@ void LineGraph::initializeChartView()
 
 void LineGraph::initializeGridLayout()
 {
-    gridLayout->addWidget(chartView, 1, 2, 1, 1, Qt::AlignCenter);
+    gridLayout->addWidget(chartView, 2, 1, 1, 1, Qt::AlignCenter);
     gridLayout->addWidget(viewModeTabWidget, 1, 1, 1, 1, Qt::AlignCenter);
-    gridLayout->setColumnMinimumWidth(2, 400);
-    gridLayout->setColumnStretch(2, 1000);
     setLayout(gridLayout);
 }
 

@@ -26,7 +26,7 @@ void TestInput::tick()
     else
     {
         Temperature * temperature = new Temperature();
-        temperature->nodeFive = rand() % 300;
+        temperature->highestTemp = rand() % 300;
         msg = dynamic_cast <CANMessage*> (temperature);
     }
     msg->timeStamp = time++;

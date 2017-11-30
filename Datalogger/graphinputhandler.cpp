@@ -2,8 +2,8 @@
 
 
 
-GraphInputHandler::GraphInputHandler(LineGraph *lineGraph1, LineGraph *lineGraph2, QObject *parent) : QObject(parent) ,
-    lineGraph1(lineGraph1) , lineGraph2(lineGraph2)
+GraphInputHandler::GraphInputHandler(LineGraph *lineGraph1, LineGraph *lineGraph2, Table * table, QObject *parent) : QObject(parent) ,
+    lineGraph1(lineGraph1) , lineGraph2(lineGraph2) , table(table)
 {
     lineGraph1->setYAxisName(1, "Temperature");
     lineGraph1->setYAxisName(2, "Voltage");
@@ -31,8 +31,8 @@ void GraphInputHandler::recieveCanMsg(CANMessage * msg)
     }
     else if (typeid(*msg) == typeid(Temperature)) //Temperature
     {
-        value = dynamic_cast <Temperature*> (msg)->nodeFive;
-        lineGraph1->updateLine1(timeStamp, value); //------------------------TAKES ONLY TEMP OF NODE 5
+        value = dynamic_cast <Temperature*> (msg)->highestTemp;
+        lineGraph1->updateLine1(timeStamp, value);
         lineGraph2->updateLine1(timeStamp, value);
     }
     else if (typeid(*msg) == typeid(CurrentRead)) //Current
