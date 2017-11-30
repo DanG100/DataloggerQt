@@ -24,7 +24,5 @@ after_build:
     - 7z x nircmd-x64.zip
     - nircmd.exe cmdwait 3000 savescreenshot screenshot.png
     - ps: start deploy\Datalogger.exe
-    - timeout 5
-    - taskkill /IM Datalogger.exe
     
     
