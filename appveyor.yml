@@ -10,7 +10,7 @@ build_script:
 artifacts:
   - path: Datalogger\release\deploy
     name: windows
-  - path: Datalogger\release\deploy\screenshot.png
+  - path: Datalogger\release\screenshot.png
     name: screenshot
   
 after_build:
@@ -19,9 +19,12 @@ after_build:
     - copy Datalogger.exe deploy
     - cd deploy
     - windeployqt Datalogger.exe
-    - appveyor DownloadFile https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/screenshot-cmd/screenshot-cmd.exe
-    - ps: start Datalogger.exe
-    - screenshot-cmd.exe -wt "FRUCD Datalogger"
+    - cd ..
+    - appveyor DownloadFile http://www.nirsoft.net/utils/nircmd-x64.zip
+    - 7z x nircmd-x64.zip
+    - nircmd.exe cmdwait 3000 savescreenshot screenshot.png
+    - ps: start deploy\Datalogger.exe
+    - timeout 5
     - taskkill /IM Datalogger.exe
     
     
