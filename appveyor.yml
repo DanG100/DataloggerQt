@@ -10,6 +10,8 @@ build_script:
 artifacts:
   - path: Datalogger\release\deploy
     name: windows
+  - path: Datalogger\release\deploy\screenshot.png
+    name: screenshot
   
 after_build:
     - cd release
@@ -17,3 +19,10 @@ after_build:
     - copy Datalogger.exe deploy
     - cd deploy
     - windeployqt Datalogger.exe
+    - appveyor DownloadFile https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/screenshot-cmd/screenshot-cmd.exe
+    - start Datalogger.exe
+    - timeout 5
+    - screenshot-cmd.exe -wt "FRUCD Datalogger"
+    - taskkill /IM Datalogger.exe
+    
+    
