@@ -2,9 +2,6 @@ init:
  - set QTDIR=C:\Qt\5.9\mingw53_32
  - set PATH=%PATH%;%QTDIR%\bin;C:\Qt\Tools\mingw530_32\bin
  
-install:
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1'))
- 
 build_script:
   - cd Datalogger
   - qmake Datalogger.pro
