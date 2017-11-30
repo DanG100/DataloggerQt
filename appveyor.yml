@@ -1,6 +1,7 @@
 init:
  - set QTDIR=C:\Qt\5.9\mingw53_32
  - set PATH=%PATH%;%QTDIR%\bin;C:\Qt\Tools\mingw530_32\bin
+ - ps: Set-DisplayResolution -Width 1920 -Height 1080 -Force
  
 build_script:
   - cd Datalogger
