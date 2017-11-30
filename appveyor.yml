@@ -23,7 +23,7 @@ after_build:
     - cd deploy
     - windeployqt Datalogger.exe
     - appveyor DownloadFile https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/screenshot-cmd/screenshot-cmd.exe
-    - start cmd /k Datalogger.exe
+    - ps: start Datalogger.exe
     - timeout 5
     - screenshot-cmd.exe -wt "FRUCD Datalogger"
     - taskkill /IM Datalogger.exe
