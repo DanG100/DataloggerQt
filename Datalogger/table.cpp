@@ -8,11 +8,11 @@ Table::Table(QWidget *parent) : QWidget(parent)
     table = new QTableWidget(tableView);
 
 
-    table->setFixedHeight(480);
-    tableView->setFixedHeight(480); //This is awful programming, fix
+    table->setFixedHeight(448);
+    tableView->setFixedHeight(448); //This is awful programming, fix
 
 
-    table->setRowCount(15);
+    table->setRowCount(14);
     table->setColumnCount(1);
     tableColumnHeader << "Value";
     tableRowHeader << "Brake" << "Throttle" << "Temp. SP 1" << "Temp. SP 2" << "Temp. SP 3" << "Temp. SP 4"

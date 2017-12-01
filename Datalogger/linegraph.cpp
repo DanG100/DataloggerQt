@@ -35,6 +35,8 @@ void LineGraph::graphSetUp()
 
     lineSeries1->setColor(lineSeries1Color);
     lineSeries2->setColor(lineSeries2Color);
+    lineSeries1->setUseOpenGL(true);
+    lineSeries2->setUseOpenGL(true);
 }
 
 void LineGraph::initializeClassElements()
@@ -55,23 +57,23 @@ void LineGraph::initializeClassElements()
     lockedViewTab = new LockedViewTab();
 
     viewModeTabWidget = new QTabWidget();
-        viewModeTabWidget->addTab(scrollingViewTab, "Scrolling View");
-        viewModeTabWidget->addTab(lockedViewTab, "Locked View");
-        connect(scrollingViewTab, SIGNAL(signalApplyPressed()), this, SLOT(doApply()));
-        connect(lockedViewTab, SIGNAL(signalApplyPressed()), this, SLOT(doApply()));
-        viewModeTabWidget->setMaximumWidth(200);
-        viewModeTabWidget->setMaximumHeight(150);
+    viewModeTabWidget->addTab(scrollingViewTab, "Scrolling View");
+    viewModeTabWidget->addTab(lockedViewTab, "Locked View");
+    connect(scrollingViewTab, SIGNAL(signalApplyPressed()), this, SLOT(doApply()));
+    connect(lockedViewTab, SIGNAL(signalApplyPressed()), this, SLOT(doApply()));
+    viewModeTabWidget->setMaximumWidth(200);
+    viewModeTabWidget->setMaximumHeight(150);
     chartView = new QChartView(chart);
-        initializeChartView();
+    initializeChartView();
     gridLayout = new QGridLayout();
-        initializeGridLayout();
+    initializeGridLayout();
 }
 
 void LineGraph::initializeChartView()
 {
     chartView->setRenderHint(QPainter::Antialiasing);
-    chartView->setMinimumHeight(800);
-    chartView->setMinimumWidth(800);
+    chartView->setMinimumHeight(500);
+    chartView->setMinimumWidth(500);
 }
 
 void LineGraph::initializeGridLayout()
