@@ -17,8 +17,7 @@ SerialPort::~SerialPort(){
 
 int SerialPort::getCanId(char* data)//for testing rn
 {
-    //int canId = data[0] + data[1];
-    int canId = data[0] + data[1];
+    int canId = (data[0] << 8) + data[1];
     return canId;
 }
 
@@ -56,7 +55,7 @@ CANMessage* SerialPort::getParsedObject(char* data)
     else if (canId == 0x247)
         currObject = new SensorStatus();
     else
-        cout << "Error: No matching CAN ID" << endl;
+        cout << "Error: No matching CAN ID" << canId << endl;
 
 
     currObject->parse(data); // parse the message based on the id
@@ -65,16 +64,31 @@ CANMessage* SerialPort::getParsedObject(char* data)
 
 void SerialPort::readDataFromPort()
 {
-    char data[PACKET_LEN+1];
-    int bytesRead = this->serial->readLine(data,PACKET_LEN+1);
-    if(bytesRead == PACKET_LEN)
+    if(!serial->canReadLine() || serial->bytesAvailable() < PACKET_LEN)
+        return;
+    QByteArray packet;
+    bool validEnd = false;
+    char c;
+    while(!validEnd && serial->read(&c,1))
     {
-        CANMessage* msg = getParsedObject(data);
+        if(c == '\n' && packet.at(packet.size()-1)==(char)0xFF)
+        {
+            validEnd = true;
+        }
+        packet.append(c);
+    }
+
+    if(packet.size() == PACKET_LEN)
+    {
+        //cout << "valid packet" << endl;
+
+        CANMessage* msg = getParsedObject(packet.data());
         emit receivedPacket(msg);
     }
     else
     {
         //handle imcomplete packets
+        cout << "invalid packet " << endl;
     }
 
 }

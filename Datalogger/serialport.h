@@ -7,7 +7,7 @@
 #include "canmessage.h"
 #include <QDebug>
 
-#define PACKET_LEN 14
+#define PACKET_LEN 16
 #define NO_SERIAL_PORT 2
 #define OPEN_ERROR 1
 #define NO_ERROR 0
