@@ -61,7 +61,6 @@ CANMessage* SerialPort::getParsedObject(char* data)
     currObject->parse(data); // parse the message based on the id
     return currObject;
 }
-
 void SerialPort::readDataFromPort()
 {
     if(!serial->canReadLine() || serial->bytesAvailable() < PACKET_LEN)
@@ -92,7 +91,6 @@ void SerialPort::readDataFromPort()
     }
 
 }
-
 int SerialPort::setupSerialPort()
 {
     serial = new QSerialPort();
