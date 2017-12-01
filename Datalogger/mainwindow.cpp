@@ -8,14 +8,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect(&serialPort,SIGNAL(receivedPacket(CANMessage*)),ui->widget,SLOT(receiveCanMsg(CANMessage*)));
+    graphInputHandler = new GraphInputHandler(ui->temperatureVoltage, ui->temperatureBmsThrottlingOut, nullptr);
+    testInput = new TestInput();
+    connect(testInput, SIGNAL(giveCanMsg(CANMessage*)), graphInputHandler, SLOT(recieveCanMsg(CANMessage*)));
+    //connect(&serialPort,SIGNAL(receivedPacket(CANMessage*)), graphInputHander,SLOT(recieveCanMsg(CANMessage*)));
     connect(&serialPort,SIGNAL(receivedPacket(CANMessage*)),&logger,SLOT(receiveCanMsg(CANMessage*)));
 }
 
 MainWindow::~MainWindow()
 {
-    disconnect(&serialPort,SIGNAL(receivedPacket(CANMessage*)),ui->widget,SLOT(receiveCanMsg(CANMessage*)));
+    disconnect(&serialPort,SIGNAL(receivedPacket(CANMessage*)), graphInputHandler,SLOT(recieveCanMsg(CANMessage*)));
     disconnect(&serialPort,SIGNAL(receivedPacket(CANMessage*)),&logger,SLOT(receiveCanMsg(CANMessage*)));
+    delete graphInputHandler;
 }
 
 void MainWindow::on_actionExit_triggered()

@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include "serialport.h"
 #include "logger.h"
+#include "graphinputhandler.h"
+
+#include "testinput.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +27,9 @@ private:
     Ui::MainWindow *ui;
     SerialPort serialPort;
     Logger logger;
+    GraphInputHandler * graphInputHandler;
+
+    TestInput * testInput;
 };
 
 #endif // MAINWINDOW_H

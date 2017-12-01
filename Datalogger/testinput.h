@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QTimer>
+#include "canmessage.h"
 
 class TestInput : public QWidget
 {
@@ -12,12 +13,13 @@ public:
     QTimer *timer;
 
 signals:
-    void givePoint(QPointF);
+    void giveCanMsg(CANMessage * msg);
 public slots:
     void tick(); //Every tick emit givePoint()
 
 private:
     int time = 0;
+    CANMessage * msg;
 };
 
 #endif // TESTINPUT_H
