@@ -1,12 +1,13 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#include <cstdint>
 
 class CANMessage
 {
 public:
     int canId     = 0;
-    int timeStamp = 0;
+    unsigned int timeStamp = 0;
     CANMessage();
     ~CANMessage();
     virtual void parse(char data[14]);
@@ -16,7 +17,7 @@ class Throttle: public CANMessage
 {
 public:
     int checkBit      = 0;
-    int throttleScale = 0;
+    uint16_t throttleScale = 0;
 
     Throttle();
     ~Throttle();
