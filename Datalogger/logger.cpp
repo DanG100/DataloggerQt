@@ -15,8 +15,8 @@ void Logger::startFile() //make file named the date/time of start of program
 {
     time_t now = time(0);
     tm* namePtr = localtime(&now);
-    QString name = asctime(namePtr);
-    file.setFileName(name + ".csv");
+    QString name = "log--" + QDateTime::currentDateTime().toString("yyyy-MM-dd--HH-mm-ss") + ".csv";
+    file.setFileName(name);
     file.open(QIODevice::WriteOnly);
 }
 

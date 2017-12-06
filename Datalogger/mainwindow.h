@@ -23,6 +23,10 @@ public:
 private slots:
     void on_actionExit_triggered();
 
+signals:
+    void startLogger();
+    void stopLogger();
+
 private:
     Ui::MainWindow *ui;
     SerialPort serialPort;
