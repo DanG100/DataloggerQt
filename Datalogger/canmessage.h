@@ -7,7 +7,7 @@ class CANMessage
 {
 public:
     int canId     = 0;
-    unsigned int timeStamp = 0;
+    uint32_t timeStamp = 0;
     CANMessage();
     ~CANMessage();
     virtual void parse(char data[14]);
@@ -30,7 +30,7 @@ class Brake: public CANMessage
 {
 public:
     int checkBit    = 0;
-    int scaledBrake = 0;
+    uint16_t scaledBrake = 0;
     int rawBrakeVal = 0;
 
     Brake();
@@ -86,9 +86,9 @@ public:
 class CurrentRead: public CANMessage
 {
 public:
-    int currDirection    = 0;
+    uint8_t currDirection    = 0;
     int rawCurr          = 0;
-    int currDirectionTwo = 0;
+    uint8_t currDirectionTwo = 0;
     int currFlow         = 0;
 
     CurrentRead();
@@ -132,9 +132,9 @@ class CurtisStatus: public CANMessage
 public:
     int capacitorHighVolt = 0;
     int capacitorLowVolt  = 0;
-    int rpmHigh           = 0;
+    uint8_t rpmHigh           = 0;
     int rpmLow            = 0;
-    int tempHigh          = 0;
+    uint8_t tempHigh          = 0;
     int tempLow           = 0;
     int throttleHigh      = 0;
     int throttleLow       = 0;
@@ -212,7 +212,7 @@ public:
     int wheelSpeedTwo   = 0;
     int wheelSpeedThree = 0;
     int wheelSpeedFour  = 0;
-    int socPercent      = 0;
+    uint8_t socPercent      = 0;
 
     SensorStatus();
     ~SensorStatus();
