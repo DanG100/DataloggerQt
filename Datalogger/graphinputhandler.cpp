@@ -18,6 +18,7 @@ void GraphInputHandler::recieveCanMsg(CANMessage * msg)
     if (typeid(*msg) == typeid(Throttle)) //Throttle
     {
         value = dynamic_cast<Throttle*> (msg)->throttleScale;
+        qDebug() << value << " " << timeStamp;
         lineGraph2->updateLine2(timeStamp, value);
     }
     else if (typeid(*msg) == typeid(Brake)) //Brake

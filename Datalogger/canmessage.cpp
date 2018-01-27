@@ -9,8 +9,8 @@ CANMessage::~CANMessage(){}
 
 void CANMessage::parse(char data[14])
 {
-    canId = (data[0] << 8) + data[1];
-    timeStamp = (data[2] << 24) + (data[3] << 16) + (data[4] << 8) + data[5];
+    canId = (data[0] << 8) + (data[1] );
+    timeStamp = (data[2] << 24) + (data[3] << 16) + (data[4] << 8) + data[5]; //read as big endian
 }
 
 Throttle::Throttle(){}

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <canmessage.h>
 #include <QFile>
+#include <QDateTime>
 
 class Logger : public QObject
 {
