@@ -48,7 +48,7 @@ private:
 
     QSpinBox * spinBox;
     QChartView * chartView;
-    QGridLayout *gridLayout;
+    QVBoxLayout *verticalLayout;
     QLabel * label;
 
 

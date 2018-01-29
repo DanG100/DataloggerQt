@@ -65,22 +65,22 @@ void LineGraph::initializeClassElements()
     viewModeTabWidget->setMaximumHeight(150);
     chartView = new QChartView(chart);
     initializeChartView();
-    gridLayout = new QGridLayout();
+    verticalLayout = new QVBoxLayout();
     initializeGridLayout();
 }
 
 void LineGraph::initializeChartView()
 {
     chartView->setRenderHint(QPainter::Antialiasing);
-    chartView->setMinimumHeight(500);
-    chartView->setMinimumWidth(500);
+    chartView->setMinimumSize(QSize(250,250));
+    chartView->setSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding);
 }
 
 void LineGraph::initializeGridLayout()
 {
-    gridLayout->addWidget(chartView, 2, 1, 1, 1, Qt::AlignCenter);
-    gridLayout->addWidget(viewModeTabWidget, 1, 1, 1, 1, Qt::AlignCenter);
-    setLayout(gridLayout);
+    verticalLayout->addWidget(chartView);
+    verticalLayout->addWidget(viewModeTabWidget,0,Qt::AlignHCenter);
+    setLayout(verticalLayout);
 }
 
 

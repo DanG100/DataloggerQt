@@ -31,7 +31,6 @@ SOURCES += \
     testinput.cpp \
     scrollingviewtab.cpp \
     lockedviewtab.cpp \
-    table.cpp \
     canmessage.cpp \
     logger.cpp \
     serialport.cpp \
@@ -43,7 +42,6 @@ HEADERS += \
     testinput.h \
     scrollingviewtab.h \
     lockedviewtab.h \
-    table.h \
     canmessage.h \
     logger.h \
     serialport.h \
