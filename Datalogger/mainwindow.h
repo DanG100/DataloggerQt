@@ -21,7 +21,11 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionExit_triggered();
+    void on_actionStart_Run_triggered();
+
+    void on_actionStop_Run_triggered();
+
+    void on_actionQuit_triggered();
 
 signals:
     void startLogger();

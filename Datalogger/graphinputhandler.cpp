@@ -2,7 +2,7 @@
 
 
 
-GraphInputHandler::GraphInputHandler(LineGraph *lineGraph1, LineGraph *lineGraph2, Table * table, QObject *parent) : QObject(parent) ,
+GraphInputHandler::GraphInputHandler(LineGraph *lineGraph1, LineGraph *lineGraph2, QTableWidget * table, QObject *parent) : QObject(parent) ,
     lineGraph1(lineGraph1) , lineGraph2(lineGraph2) , table(table)
 {
     lineGraph1->setYAxisName(1, "Temperature");

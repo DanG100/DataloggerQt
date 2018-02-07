@@ -4,17 +4,15 @@
 #include <QObject>
 #include "serialport.h"
 #include "linegraph.h"
-#include "table.h"
 
 class GraphInputHandler : public QObject            //This is going to be used to handle the flow of data into the table also
 {
     Q_OBJECT
 public:
-    explicit GraphInputHandler(LineGraph *lineGraph1, LineGraph *lineGraph2, Table * table ,QObject *parent = nullptr);
+    explicit GraphInputHandler(LineGraph *lineGraph1, LineGraph *lineGraph2, QTableWidget * table ,QObject *parent = nullptr);
     LineGraph * lineGraph1;
     LineGraph * lineGraph2;
-    Table * table;
-
+    QTableWidget * table;
 signals:
     void newThrottle(float timeStamp, float value);
     void newBrake(float timeStamp, float value);

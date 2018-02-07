@@ -8,7 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    graphInputHandler = new GraphInputHandler(ui->temperatureVoltage, ui->temperatureBmsThrottlingOut, nullptr);
+    ui->menuBar->setNativeMenuBar(false);
+    graphInputHandler = new GraphInputHandler(ui->temperatureVoltage, ui->temperatureBmsThrottlingOut, ui->tableWidget);
     testInput = new TestInput();
     //connect(testInput, SIGNAL(giveCanMsg(CANMessage*)), graphInputHandler, SLOT(recieveCanMsg(CANMessage*)));
     connect(&serialPort,SIGNAL(receivedPacket(CANMessage*)), graphInputHandler,SLOT(recieveCanMsg(CANMessage*)));
@@ -40,7 +41,22 @@ MainWindow::~MainWindow()
     delete graphInputHandler;
 }
 
-void MainWindow::on_actionExit_triggered()
+
+void MainWindow::on_actionStart_Run_triggered()
+{
+    emit startLogger();
+    ui->statusBar->showMessage("Run Started",1000);
+    ui->statusBar->showMessage("Running");
+}
+
+void MainWindow::on_actionStop_Run_triggered()
+{
+    emit stopLogger();
+    ui->statusBar->showMessage("Run Stopped",1000);
+    ui->statusBar->showMessage("Stopped");
+}
+
+void MainWindow::on_actionQuit_triggered()
 {
     QApplication::quit();
 }
