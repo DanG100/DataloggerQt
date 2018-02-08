@@ -27,6 +27,10 @@ private slots:
 
     void on_actionQuit_triggered();
 
+    void on_startbutton_clicked();
+
+    void on_stopbutton_clicked();
+
 signals:
     void startLogger();
     void stopLogger();

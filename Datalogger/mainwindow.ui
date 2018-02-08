@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>560</height>
+    <width>999</width>
+    <height>570</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -32,28 +32,51 @@
      <height>500</height>
     </size>
    </property>
-   <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0">
+   <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0,0">
     <item row="0" column="0">
-     <widget class="QTableWidget" name="tableWidget">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="sizeAdjustPolicy">
-       <enum>QAbstractScrollArea::AdjustToContents</enum>
-      </property>
-     </widget>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="startbutton">
+        <property name="text">
+         <string>Start Logging</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="stopbutton">
+        <property name="text">
+         <string>Stop Logging</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <stylestrategy>PreferAntialias</stylestrategy>
+         </font>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
-    <item row="0" column="1">
-     <widget class="LineGraph" name="temperatureVoltage" native="true">
+    <item row="0" column="5">
+     <widget class="LineGraph" name="temperatureBmsThrottlingOut" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
         <horstretch>0</horstretch>
@@ -74,8 +97,8 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="2">
-     <widget class="LineGraph" name="temperatureBmsThrottlingOut" native="true">
+    <item row="0" column="4">
+     <widget class="LineGraph" name="temperatureVoltage" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
         <horstretch>0</horstretch>
@@ -99,11 +122,14 @@
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>999</width>
      <height>31</height>
     </rect>
    </property>
@@ -182,7 +208,7 @@
   <customwidget>
    <class>LineGraph</class>
    <extends>QWidget</extends>
-   <header location="global">linegraph.h</header>
+   <header>linegraph.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -31,6 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers); //Disables user from editing table values
 
     emit startLogger();
+    ui->stopbutton->setEnabled(true);
+    ui->startbutton->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -59,4 +61,22 @@ void MainWindow::on_actionStop_Run_triggered()
 void MainWindow::on_actionQuit_triggered()
 {
     QApplication::quit();
+}
+
+void MainWindow::on_startbutton_clicked()
+{
+    emit startLogger();
+    ui->startbutton->setEnabled(false);
+    ui->stopbutton->setEnabled(true);
+    ui->statusBar->showMessage("Run Started",1000);
+    ui->statusBar->showMessage("Running");
+}
+
+void MainWindow::on_stopbutton_clicked()
+{
+    emit stopLogger();
+    ui->startbutton->setEnabled(true);
+    ui->stopbutton->setEnabled(false);
+    ui->statusBar->showMessage("Run Stopped",1000);
+    ui->statusBar->showMessage("Stopped");
 }
